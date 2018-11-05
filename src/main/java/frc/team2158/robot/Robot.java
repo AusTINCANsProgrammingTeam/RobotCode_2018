@@ -10,6 +10,7 @@ import frc.team2158.robot.command.drive.OperatorControl;
 import frc.team2158.robot.command.drive.ToggleGearMode;
 import frc.team2158.robot.command.intake.*;
 import frc.team2158.robot.command.lift.MoveLift;
+import frc.team2158.robot.subsystem.FlywheelSubsystem;
 import frc.team2158.robot.subsystem.drive.DriveSubsystem;
 import frc.team2158.robot.subsystem.drive.GearMode;
 import frc.team2158.robot.subsystem.drive.TalonSRXGroup;
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
     private static DriveSubsystem driveSubsystem;
     private static LiftSubsystem liftSubsystem;
     private static IntakeSubsystem intakeSubsystem;
+    private static FlywheelSubsystem flywheelSubsystem;
 
     private static OperatorInterface operatorInterface;
     private Spark blinkin = new Spark(6);
@@ -156,6 +158,13 @@ public class Robot extends TimedRobot {
             return intakeSubsystem;
         }
         throw new RuntimeException("Intake subsystem has not yet been initialized!");
+    }
+
+    public static FlywheelSubsystem getFlywheelSubsystem() {
+        if(flywheelSubsystem != null) {
+            return flywheelSubsystem;
+        }
+        throw new RuntimeException("Flywheel subsystem has not yet been initialized!");
     }
 
     /**
