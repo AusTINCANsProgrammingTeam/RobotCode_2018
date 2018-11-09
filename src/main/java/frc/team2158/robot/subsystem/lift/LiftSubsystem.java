@@ -1,6 +1,7 @@
 package frc.team2158.robot.subsystem.lift;
 
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team2158.robot.command.lift.StopLift;
 
@@ -47,6 +48,10 @@ public class LiftSubsystem extends Subsystem {
      * Stops the lift by setting the speed to zero.
      */
     public void stopLift() {
+        for(double i = 0; i < 1.0; i = i+ .02){
+            liftSpeedController.set(DEFAULT_LIFT_UP_SPEED-i);
+            Timer.delay(.0025);
+        }
         liftSpeedController.set(0.0);
     }
     
