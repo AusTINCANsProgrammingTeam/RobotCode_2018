@@ -28,6 +28,7 @@ import java.util.logging.Logger;
  */
 public class Robot extends TimedRobot {
     private SendableChooser<Double> autoChooser;
+
     private static final Logger LOGGER = Logger.getLogger(Robot.class.getName());
     private static final LoggingSystem LOGGING_SYSTEM = LoggingSystem.getInstance();
 
@@ -58,27 +59,37 @@ public class Robot extends TimedRobot {
         autoChooser.addObject("2.50", 2.50);
         autoChooser.addObject("2.75", 2.75);
         autoChooser.addObject("3.0", 3.5);
+
         /*
-            ----TODO THIS IS WHAT YOU COPY/PASTE TO ADD MORE DATA----
+
             autoChooser.addObject("#.#", #.#);
          */
         SmartDashboard.putData("Time to run forward in auto!", autoChooser);
+        TalonSRXGroup leftGroup =  new TalonSRXGroup(
+                SmartDashboard.getNumber("pLeft", 0),
+                SmartDashboard.getNumber("iLeft", 0),
+                SmartDashboard.getNumber("dLeft", 0),
+                new WPI_TalonSRX(RobotMap.LEFT_MOTOR_1), // This motor is the master for the left side.
+                new WPI_TalonSRX(RobotMap.LEFT_MOTOR_2),
+                new WPI_TalonSRX(RobotMap.LEFT_MOTOR_3)
+        );
+
+        TalonSRXGroup rightGroup = new TalonSRXGroup(
+                SmartDashboard.getNumber("pRight", 0),
+                SmartDashboard.getNumber("iRight", 0),
+                SmartDashboard.getNumber("dRight", 0),
+                new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_1), // This motor is the master for the right side.
+                new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_2),
+                new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_3)
+        );
 
         // Initialize the drive subsystem.
-        driveSubsystem = new DriveSubsystem(
-                new TalonSRXGroup(
-                        new WPI_TalonSRX(RobotMap.LEFT_MOTOR_1), // This motor is the master for the left side.
-                        new WPI_TalonSRX(RobotMap.LEFT_MOTOR_2),
-                        new WPI_TalonSRX(RobotMap.LEFT_MOTOR_3)
-                ),
-                new TalonSRXGroup(
-                        new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_1), // This motor is the master for the right side.
-                        new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_2),
-                        new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_3)
-                ),
+        driveSubsystem = new DriveSubsystem(leftGroup, rightGroup
+              ,
                 new DoubleSolenoid(RobotMap.PCM_ADDRESS, RobotMap.GEARBOX_FORWARD_CHANNEL,
                         RobotMap.GEARBOX_REVERSE_CHANNEL)
         );
+
         LOGGER.info("Drive Subsystem Initialized properly!");
         // Initialize the lift subsystem.
         liftSubsystem = new LiftSubsystem(
@@ -192,22 +203,21 @@ public class Robot extends TimedRobot {
      */
     private static double solid_red = 0.61;
     private static double solid_blue = 0.87;
-    private static double light_chase_red = -0.31;
-    private static double light_chase_blue = -0.29;
-    private static double shot_red = -0.85;
-    private static double shot_blue = -0.83;
-    private static double fast_rainbow = -0.57;
-    private static double solid_yellow = 0.69;
-    private static double solid_orange = 0.63;
-    private static double color1_strobe = 0.15;
-    private static double color2_strobe = 0.35;
-    private static double strobe_red = -0.11;
-    private static double strobe_blue = -0.9;
     private static double breath_red = -0.17;
     private static double breath_blue = -0.15;
 
     @Override
     public void teleopPeriodic() {
+        SmartDashboard.putNumber("Left Sensor Position", getDriveSubsystem().getLeftController().getMaster()
+                .getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Left Sensor Velocity", getDriveSubsystem().getLeftController().getMaster()
+                .getSelectedSensorVelocity(0));
+
+        SmartDashboard.putNumber("Right Sensor Position", getDriveSubsystem().getRightController().getMaster()
+                .getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Right Sensor Velocity", getDriveSubsystem().getRightController().getMaster()
+                .getSelectedSensorVelocity(0));
+
         Scheduler.getInstance().run();
         GearMode gearMode = getDriveSubsystem().getGearMode();
 

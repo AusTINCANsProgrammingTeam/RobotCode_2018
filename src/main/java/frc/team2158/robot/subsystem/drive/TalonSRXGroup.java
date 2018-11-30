@@ -1,8 +1,10 @@
 package frc.team2158.robot.subsystem.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.logging.Logger;
 
@@ -17,7 +19,7 @@ public class TalonSRXGroup implements SpeedController {
      * @param master the master motor. All other motors will follow this one.
      * @param slaves the slave motors. Follow the master motor.
      */
-    public TalonSRXGroup(WPI_TalonSRX master, WPI_TalonSRX... slaves) {
+    public TalonSRXGroup(Double kP, Double kI, Double kD, WPI_TalonSRX master, WPI_TalonSRX... slaves) {
         this.master = master;
 
         master.configContinuousCurrentLimit(20, 0);
@@ -26,13 +28,18 @@ public class TalonSRXGroup implements SpeedController {
         master.enableCurrentLimit(true);
         master.configOpenloopRamp(0.250, 0);
         master.configClosedloopRamp(0.250, 0);
-        master.config_kP(0, 0.4, 0);
-        master.config_kI(0, 0.0, 0);
-        master.config_kD(0, 0.0, 0);
+        master.config_kP(0, kP, 0);
+        master.config_kI(0, kI, 0);
+        master.config_kD(0, kD, 0);
+        master.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 
         for(WPI_TalonSRX slave : slaves) {
             slave.follow(master);
         }
+    }
+
+    public WPI_TalonSRX getMaster() {
+        return master;
     }
 
     /**

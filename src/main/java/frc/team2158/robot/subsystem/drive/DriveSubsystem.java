@@ -16,7 +16,10 @@ public class DriveSubsystem extends Subsystem {
 
     private DifferentialDrive differentialDrive;
     private GearMode gearMode;
+    private PIDMode pidMode = PIDMode.OFF;
     private DoubleSolenoid gearboxSolenoid;
+    private TalonSRXGroup leftController;
+    private TalonSRXGroup rightController;
 
     /**
      * This initializes the drive subsystem.
@@ -24,8 +27,10 @@ public class DriveSubsystem extends Subsystem {
      * @param rightSpeedController the speedController on the right to be initialized.
      * @param gearboxSolenoid Solenoid to be initialized.
      */
-    public DriveSubsystem(SpeedController leftSpeedController, SpeedController rightSpeedController,
+    public DriveSubsystem(TalonSRXGroup leftSpeedController, TalonSRXGroup rightSpeedController,
                           DoubleSolenoid gearboxSolenoid) {
+        this.rightController = rightSpeedController;
+        this.leftController = leftSpeedController;
         this.differentialDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
         differentialDrive.setSafetyEnabled(false);
         this.gearboxSolenoid = gearboxSolenoid;
@@ -83,6 +88,21 @@ public class DriveSubsystem extends Subsystem {
         updateGearMode();
     }
 
+    public void togglePIDMode() {
+        switch (pidMode){
+            case ON:
+                pidMode = PIDMode.OFF;
+                break;
+            case OFF:
+                pidMode = PIDMode.ON;
+                break;
+        }
+    }
+
+    public PIDMode getPidMode() {
+        return pidMode;
+    }
+
     /**
      * Changes gear mode internally
      */
@@ -99,5 +119,13 @@ public class DriveSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+    }
+
+    public TalonSRXGroup getLeftController() {
+        return leftController;
+    }
+
+    public TalonSRXGroup getRightController() {
+        return rightController;
     }
 }
