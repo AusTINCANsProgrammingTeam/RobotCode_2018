@@ -5,9 +5,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team2158.robot.command.drive.DriveMode;
-import frc.team2158.robot.command.drive.OperatorControl;
-import frc.team2158.robot.command.drive.ToggleGearMode;
+import frc.team2158.robot.command.drive.*;
 import frc.team2158.robot.command.intake.*;
 import frc.team2158.robot.command.lift.MoveLift;
 import frc.team2158.robot.subsystem.drive.DriveSubsystem;
@@ -35,6 +33,7 @@ public class Robot extends TimedRobot {
     private static DriveSubsystem driveSubsystem;
     private static LiftSubsystem liftSubsystem;
     private static IntakeSubsystem intakeSubsystem;
+    private static OperatorControl operatorControl;
 
     private static OperatorInterface operatorInterface;
     private Spark blinkin = new Spark(6);
@@ -182,7 +181,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopInit() {
-
+        operatorControl = new OperatorControl(DriveMode.ARCADE);
         LOGGER.info("Teleop Init!");
         operatorInterface.bindButton("buttonLB", OperatorInterface.ButtonMode.WHILE_HELD, new Intake());
         operatorInterface.bindButton("buttonLT", OperatorInterface.ButtonMode.WHILE_HELD, new Outtake());
@@ -192,11 +191,17 @@ public class Robot extends TimedRobot {
         operatorInterface.bindButton("buttonX", OperatorInterface.ButtonMode.WHILE_HELD, new CounterClockwise());
         operatorInterface.bindButton("buttonB", OperatorInterface.ButtonMode.WHILE_HELD, new Clockwise());
         operatorInterface.bindButton("buttonA", OperatorInterface.ButtonMode.WHEN_PRESSED, new ToggleGearMode());
-        operatorInterface.bindButton("buttonBack", OperatorInterface.ButtonMode.WHILE_HELD, new PivotDown());
-        operatorInterface.bindButton("buttonStart", OperatorInterface.ButtonMode.WHILE_HELD, new PivotUp());
-        Scheduler.getInstance().add(new OperatorControl(DriveMode.ARCADE));
+        //operatorInterface.bindButton("buttonBack", OperatorInterface.ButtonMode.WHILE_HELD, new PivotDown());
+        operatorInterface.bindButton("buttonBack", OperatorInterface.ButtonMode.WHEN_PRESSED, new ToggleDriveMode());
+        //operatorInterface.bindButton("buttonStart", OperatorInterface.ButtonMode.WHILE_HELD, new PivotUp());
+        operatorInterface.bindButton("buttonStart", OperatorInterface.ButtonMode.WHEN_PRESSED, new TogglePIDMode());
+        Scheduler.getInstance().add(operatorControl);
     // Stretch Goal: Make the button bindings come from an xml/json config.
     //how would we implement such a system?
+}
+
+public static OperatorControl getOperatorControl(){
+        return operatorControl;
 }
     /**
      * Runs the TeleOp Periodic code.
@@ -217,6 +222,8 @@ public class Robot extends TimedRobot {
                 .getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Right Sensor Velocity", getDriveSubsystem().getRightController().getMaster()
                 .getSelectedSensorVelocity(0));
+
+        SmartDashboard.putString("PIDMode", getDriveSubsystem().getPidMode().toString());
 
         Scheduler.getInstance().run();
         GearMode gearMode = getDriveSubsystem().getGearMode();

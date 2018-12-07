@@ -60,6 +60,10 @@ public class TalonSRXGroup implements SpeedController {
         master.set(ControlMode.PercentOutput, speed);
     }
 
+    public void set(ControlMode mode, double velocity){
+        master.set(mode, velocity);
+    }
+
     /**
      * Common interface for getting the current set speed of the speed controller.
      * @return the current set speed. Value is between -1.0 and 1.0.

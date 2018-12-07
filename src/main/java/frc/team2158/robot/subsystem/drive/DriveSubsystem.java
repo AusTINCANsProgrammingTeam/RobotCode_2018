@@ -1,5 +1,6 @@
 package frc.team2158.robot.subsystem.drive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -44,7 +45,16 @@ public class DriveSubsystem extends Subsystem {
      * @param rightSpeed speed
      */
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        differentialDrive.tankDrive(leftSpeed, rightSpeed);
+        double magic_number = 2572.69;
+        if(pidMode == PIDMode.ON){
+            double targetVelocityLeft_UnitsPer100ms = leftSpeed * magic_number * 4096 / 600;
+            double targetVelocityRight_UnitsPer100ms = rightSpeed * magic_number * 4096 / 600;
+            /* 500 RPM in either direction */
+            leftController.set(ControlMode.Velocity, targetVelocityLeft_UnitsPer100ms);
+            rightController.set(ControlMode.Velocity, targetVelocityRight_UnitsPer100ms);
+        } else {
+            differentialDrive.tankDrive(leftSpeed, rightSpeed);
+        }
     }
     /**
      * Sets the speed and heading of the arcade drive.
@@ -53,6 +63,7 @@ public class DriveSubsystem extends Subsystem {
      */
     public void arcadeDrive(double velocity, double heading) {
         differentialDrive.arcadeDrive(velocity, heading);
+
     }
 
     /**

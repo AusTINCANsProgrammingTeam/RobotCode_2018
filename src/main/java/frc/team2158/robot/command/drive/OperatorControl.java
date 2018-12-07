@@ -32,6 +32,22 @@ public class OperatorControl extends Command {
         this.joystick = Robot.getOperatorInterface().getJoystick();
     }
 
+    public DriveMode getDriveMode() {
+        return driveMode;
+    }
+
+    public void toggleDriveMode(){
+        switch (driveMode){
+
+            case ARCADE:
+                driveMode = DriveMode.TANK;
+                break;
+            case TANK:
+                driveMode = DriveMode.ARCADE;
+                break;
+        }
+    }
+
     @Override
     public void execute() {
         switch(driveMode) {
