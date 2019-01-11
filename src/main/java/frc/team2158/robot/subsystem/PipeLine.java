@@ -52,9 +52,9 @@ public class PipeLine implements VisionPipeline {
 
         // Step HSV_Threshold0:
         Mat hsvThresholdInput = cvResizeOutput;
-        double[] hsvThresholdHue = {10.521582733812949, 39.942071938569306};
-        double[] hsvThresholdSaturation = {85.99370503597122, 249.41768826619963};
-        double[] hsvThresholdValue = {165.148940169898, 255.0};
+        double[] hsvThresholdHue = {0.0, 25.534150612959717};
+        double[] hsvThresholdSaturation = {147.9091726618705, 255.0};
+        double[] hsvThresholdValue = {92.87320143884892, 255.0};
         hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
         // Step CV_erode0:

@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
 
         visionThread = new VisionThread(camera, new PipeLine(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
-                Rect r = Imgproc.boundingRect(pipeline..filterContoursOutput().get(0);
+                Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
                 }
