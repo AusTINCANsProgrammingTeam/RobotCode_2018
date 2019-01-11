@@ -15,6 +15,16 @@ import frc.team2158.robot.subsystem.drive.GearMode;
 import frc.team2158.robot.subsystem.drive.TalonSRXGroup;
 import frc.team2158.robot.subsystem.intake.IntakeSubsystem;
 import frc.team2158.robot.subsystem.lift.LiftSubsystem;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+
+import frc.team2158.robot.subsystem.PipeLine;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.vision.VisionRunner;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import java.util.logging.Logger;
 //TODO Rename some classes <- Billy's job.
@@ -36,6 +46,13 @@ public class Robot extends TimedRobot {
     private static IntakeSubsystem intakeSubsystem;
 
     private static OperatorInterface operatorInterface;
+    private static final int IMG_WIDTH = 320;
+    private static final int IMG_HEIGHT = 240;
+
+    private VisionThread visionThread;
+    private double centerX = 0.0;
+
+    private final Object imgLock = new Object();
     private Spark blinkin = new Spark(6);
 
     /**
@@ -101,6 +118,19 @@ public class Robot extends TimedRobot {
         // Initialize the operator interface.
         operatorInterface = new OperatorInterface();
 
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+
+        visionThread = new VisionThread(camera, new PipeLine(), pipeline -> {
+            if (!pipeline.filterContoursOutput().isEmpty()) {
+                Rect r = Imgproc.boundingRect(pipeline..filterContoursOutput().get(0);
+                synchronized (imgLock) {
+                    centerX = r.x + (r.width / 2);
+                }
+            }
+        });
+        visionThread.start();
+
         LOGGER.info("Robot initialization completed.");
     }
 
@@ -116,22 +146,17 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        if(timer.get() < 2){
-            getDriveSubsystem().arcadeDrive(-0.75, 0);
-        } else {
-            getDriveSubsystem().arcadeDrive(0, 0);
+        double centerX;
+        synchronized (imgLock) {
+            centerX = this.centerX;
         }
-        if(timer.get() < 0.5){
-            //getIntakeSubsystem().pivotIntake(IntakeSubsystem.PivotDirection.DOWN);
-        } else {
-
-            //getIntakeSubsystem().stopPivot();
-        }
+        double turn = centerX - (IMG_WIDTH / 2);
+        getDriveSubsystem().arcadeDrive(-0.3, turn * 0.005);
     }
 
     public static DriveSubsystem getDriveSubsystem() {
         if(driveSubsystem != null) {
-            return driveSubsystem;
+          return driveSubsystem;
         }
         throw new RuntimeException("Drive subsystem has not yet been initialized!");
     }

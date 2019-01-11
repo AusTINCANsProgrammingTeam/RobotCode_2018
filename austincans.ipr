@@ -16,13 +16,15 @@
       <module name="austincans2018_test" target="1.8" />
       <module name="austincans_main" target="1.8" />
       <module name="austincans_test" target="1.8" />
+      <module name="RobotCode_2018_main" target="1.8" />
+      <module name="RobotCode_2018_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="CopyrightManager" default="" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -193,9 +195,10 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RobotCode_2018.iml" filepath="$PROJECT_DIR$/RobotCode_2018.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RobotCode_2018_main.iml" filepath="$PROJECT_DIR$/RobotCode_2018_main.iml" group="RobotCode_2018" />
+      <module fileurl="file://$PROJECT_DIR$/RobotCode_2018_test.iml" filepath="$PROJECT_DIR$/RobotCode_2018_test.iml" group="RobotCode_2018" />
       <module fileurl="file://$PROJECT_DIR$/austincans.iml" filepath="$PROJECT_DIR$/austincans.iml" />
-      <module fileurl="file://$PROJECT_DIR$/austincans2018.iml" filepath="$PROJECT_DIR$/austincans2018.iml" />
-      <module fileurl="file://$PROJECT_DIR$/austincans2018_main.iml" filepath="$PROJECT_DIR$/austincans2018_main.iml" group="austincans2018" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
@@ -203,6 +206,9 @@
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Gradle: edu.wpi.first.cscore:cscore-java:1.1.0">
@@ -266,15 +272,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.powerup/MatchData/2018.01.07/5621fbfada81352fb32981607a0ae4310163e9e9/MatchData-2018.01.07-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: org.luaj:luaj-jse:3.0.1">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.luaj/luaj-jse/3.0.1/99245b2df284805e1cb835e9be47c243f9717511/luaj-jse-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.luaj/luaj-jse/3.0.1/d281bb85eb71cae416fac078fbca5df5aa412e02/luaj-jse-3.0.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.opencv:opencv-java:3.2.0">
