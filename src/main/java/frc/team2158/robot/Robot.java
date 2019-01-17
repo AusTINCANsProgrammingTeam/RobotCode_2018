@@ -60,6 +60,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+        camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
         autoChooser = new SendableChooser<>();
         autoChooser.addObject("0.0", 0.0);
@@ -97,6 +99,7 @@ public class Robot extends TimedRobot {
                         RobotMap.GEARBOX_REVERSE_CHANNEL)
         );
         LOGGER.info("Drive Subsystem Initialized properly!");
+
         // Initialize the lift subsystem.
         liftSubsystem = new LiftSubsystem(
                 new SpeedControllerGroup(
@@ -104,7 +107,7 @@ public class Robot extends TimedRobot {
                         new Spark(RobotMap.LIFT_MOTOR_2),
                         new Spark(RobotMap.LIFT_MOTOR_3)
                 ),
-                true 
+                true
         );
         LOGGER.info("Lift Subsystem Initialized properly!");
         // Initialize the intake subsystem.
@@ -118,15 +121,16 @@ public class Robot extends TimedRobot {
         // Initialize the operator interface.
         operatorInterface = new OperatorInterface();
 
-        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-
         visionThread = new VisionThread(camera, new PipeLine(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
+                LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
                 }
+            }
+            else{
+                centerX = 0.0;
             }
         });
         visionThread.start();
@@ -146,17 +150,29 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+
         double centerX;
         synchronized (imgLock) {
             centerX = this.centerX;
         }
         double turn = centerX - (IMG_WIDTH / 2);
-        getDriveSubsystem().arcadeDrive(-0.3, turn * 0.005);
+        LOGGER.info(Double.toString(centerX));
+        if((centerX == 0) || (centerX < 50 && centerX > 30)){
+            getDriveSubsystem().arcadeDrive(0,0);
+        }
+        else if(centerX >= 50){
+            LOGGER.warning("o5");
+            getDriveSubsystem().arcadeDrive(-.3, turn * 0.005);}
+        else if(centerX <= 30)
+        {
+            LOGGER.warning("06");
+            getDriveSubsystem().arcadeDrive(-.3, turn * -0.004);
+        }
     }
 
     public static DriveSubsystem getDriveSubsystem() {
         if(driveSubsystem != null) {
-          return driveSubsystem;
+            return driveSubsystem;
         }
         throw new RuntimeException("Drive subsystem has not yet been initialized!");
     }
@@ -200,18 +216,20 @@ public class Robot extends TimedRobot {
         LOGGER.info("Teleop Init!");
         operatorInterface.bindButton("buttonLB", OperatorInterface.ButtonMode.WHILE_HELD, new Intake());
         operatorInterface.bindButton("buttonLT", OperatorInterface.ButtonMode.WHILE_HELD, new Outtake());
+        //operatorInterface.bindButton("buttonLT", OperatorInterface.ButtonMode.WHILE_HELD, new TestIntake(false));
         operatorInterface.bindButton("buttonY", OperatorInterface.ButtonMode.WHEN_PRESSED, new ToggleIntakeSolenoid());
         operatorInterface.bindButton("buttonRB", OperatorInterface.ButtonMode.WHILE_HELD, new MoveLift(LiftSubsystem.Direction.UP, LiftSubsystem.DEFAULT_LIFT_UP_SPEED));
-        operatorInterface.bindButton("buttonRT", OperatorInterface.ButtonMode.WHILE_HELD, new MoveLift(LiftSubsystem.Direction.DOWN, LiftSubsystem.DEFAULT_LIFT_DOWN_SPEED));
+        //operatorInterface.bindButton("buttonRT", OperatorInterface.ButtonMode.WHILE_HELD, new MoveLift(LiftSubsystem.Direction.DOWN, LiftSubsystem.DEFAULT_LIFT_DOWN_SPEED));
+        //operatorInterface.bindButton("buttonRT", OperatorInterface.ButtonMode.WHILE_HELD, new TestIntake(true));
         operatorInterface.bindButton("buttonX", OperatorInterface.ButtonMode.WHILE_HELD, new CounterClockwise());
         operatorInterface.bindButton("buttonB", OperatorInterface.ButtonMode.WHILE_HELD, new Clockwise());
         operatorInterface.bindButton("buttonA", OperatorInterface.ButtonMode.WHEN_PRESSED, new ToggleGearMode());
         operatorInterface.bindButton("buttonBack", OperatorInterface.ButtonMode.WHILE_HELD, new PivotDown());
         operatorInterface.bindButton("buttonStart", OperatorInterface.ButtonMode.WHILE_HELD, new PivotUp());
         Scheduler.getInstance().add(new OperatorControl(DriveMode.ARCADE));
-    // Stretch Goal: Make the button bindings come from an xml/json config.
-    //how would we implement such a system?
-}
+        // Stretch Goal: Make the button bindings come from an xml/json config.
+        //how would we implement such a system?
+    }
     /**
      * Runs the TeleOp Periodic code.
      */
