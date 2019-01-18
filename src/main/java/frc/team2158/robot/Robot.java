@@ -128,7 +128,7 @@ public class Robot extends TimedRobot {
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
                 }
-            }
+
             else{
                 centerX = 0.0;
             }
