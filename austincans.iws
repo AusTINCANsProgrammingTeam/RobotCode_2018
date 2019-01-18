@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b760a822-70bc-49c4-8e0b-1b28a52fbf43" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -73,21 +74,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="124" column="48" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
+            <state relative-caret-position="255">
+              <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7782#7783#0" expanded="true" />
+                <element signature="e#7806#7807#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="31" column="40" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="40" />
+            <state relative-caret-position="425">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,10 +97,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/HashMap.java">
+        <entry file="file://$USER_HOME$/GRIP/GripPipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="137" column="13" selection-start-line="137" selection-start-column="13" selection-end-line="137" selection-end-column="13" />
+            <state relative-caret-position="289">
+              <caret line="17" column="21" lean-forward="true" selection-end-line="218" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,9 +191,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pipeline</find>
       <find>filterco</find>
       <find>pipe</find>
+      <find>pipeline</find>
       <find>filter</find>
     </findStrings>
   </component>
@@ -253,8 +257,8 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/command/intake/CounterClockwise.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/command/intake/Clockwise.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/robotCorrection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" />
       </list>
     </option>
   </component>
@@ -365,7 +369,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547685743789" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547777531367" />
     <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -602,8 +606,6 @@
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/logging/LoggingSubsystem.java" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/openrio.mirror.third.ctre/CTRE-phoenix-java/5.1.2.1/a6524440658bcd925d5bbd06e84b3cd6ba80c4a7/CTRE-phoenix-java-5.1.2.1-sources.jar!/com/ctre/phoenix/motorcontrol/can/WPI_TalonSRX.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.wpilibj/wpilibj-java/2018.1.1/beb4907631b352f07723679c3e90632c0533e725/wpilibj-java-2018.1.1-sources.jar!/edu/wpi/first/wpilibj/PIDOutput.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.wpilibj/wpilibj-java/2018.1.1/beb4907631b352f07723679c3e90632c0533e725/wpilibj-java-2018.1.1-sources.jar!/edu/wpi/first/wpilibj/SpeedController.java" />
     <entry file="file://$PROJECT_DIR$/gradlew">
@@ -809,10 +811,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="31" column="40" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="40" />
+        <state relative-caret-position="1785">
+          <caret line="137" column="13" selection-start-line="137" selection-start-column="13" selection-end-line="137" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/GRIP/GripPipeline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="21" lean-forward="true" selection-end-line="218" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -821,11 +840,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="124" column="48" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
+        <state relative-caret-position="255">
+          <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7782#7783#0" expanded="true" />
+            <element signature="e#7806#7807#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -10,6 +10,7 @@ import frc.team2158.robot.command.drive.OperatorControl;
 import frc.team2158.robot.command.drive.ToggleGearMode;
 import frc.team2158.robot.command.intake.*;
 import frc.team2158.robot.command.lift.MoveLift;
+import frc.team2158.robot.subsystem.GripPipeline;
 import frc.team2158.robot.subsystem.drive.DriveSubsystem;
 import frc.team2158.robot.subsystem.drive.GearMode;
 import frc.team2158.robot.subsystem.drive.TalonSRXGroup;
@@ -18,7 +19,7 @@ import frc.team2158.robot.subsystem.lift.LiftSubsystem;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
-import frc.team2158.robot.subsystem.PipeLine;
+import frc.team2158.robot.subsystem.GripPipeline;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -121,15 +122,14 @@ public class Robot extends TimedRobot {
         // Initialize the operator interface.
         operatorInterface = new OperatorInterface();
 
-        visionThread = new VisionThread(camera, new PipeLine(), pipeline -> {
-            if (!pipeline.filterContoursOutput().isEmpty()) {
+        visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+            if (!pipeline.){
                 LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
                 }
             }
-
             else{
                 centerX = 0.0;
             }
