@@ -19,7 +19,6 @@ import frc.team2158.robot.subsystem.lift.LiftSubsystem;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
-import frc.team2158.robot.subsystem.GripPipeline;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -60,7 +59,7 @@ public class Robot extends TimedRobot {
      *Initializes the TalonSRX Groups, the Solenoid, Operator Interface, Lift Motors, and Intake Motors.
      */
     @Override
-    public void robotInit() {
+    public void robotInit()  {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
         camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
@@ -123,7 +122,7 @@ public class Robot extends TimedRobot {
         operatorInterface = new OperatorInterface();
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-            if (!pipeline.){
+            if (){
                 LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
