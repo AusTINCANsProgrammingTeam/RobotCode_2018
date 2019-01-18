@@ -19,7 +19,6 @@ import frc.team2158.robot.subsystem.lift.LiftSubsystem;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
-import frc.team2158.robot.subsystem.GripPipeline;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -123,7 +122,7 @@ public class Robot extends TimedRobot {
         operatorInterface = new OperatorInterface();
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-            if (!pipeline.){
+            if (!pipeline){
                 LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {

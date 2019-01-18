@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b760a822-70bc-49c4-8e0b-1b28a52fbf43" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/PipeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -74,11 +73,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
+            <state relative-caret-position="1436">
+              <caret line="126" column="75" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7806#7807#0" expanded="true" />
+                <element signature="e#7755#7756#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="179">
               <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -193,8 +192,8 @@
     <findStrings>
       <find>filterco</find>
       <find>pipe</find>
-      <find>pipeline</find>
       <find>filter</find>
+      <find>pipeline</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -564,9 +563,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21786942" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21786942" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -581,7 +579,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003436" side_tool="true" visible="true" weight="0.33333334" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="7" sideWeight="0.5003436" side_tool="true" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49791667" weight="0.32946146" />
       <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
@@ -830,7 +828,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/subsystem/GripPipeline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
+        <state relative-caret-position="179">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -840,11 +838,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/team2158/robot/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
+        <state relative-caret-position="1436">
+          <caret line="126" column="75" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7806#7807#0" expanded="true" />
+            <element signature="e#7755#7756#0" expanded="true" />
           </folding>
         </state>
       </provider>
