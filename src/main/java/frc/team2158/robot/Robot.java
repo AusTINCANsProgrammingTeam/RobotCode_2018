@@ -37,9 +37,6 @@ import java.util.logging.Logger;
  * Initializes the teleOperated code.
  */
 public class Robot extends TimedRobot {
-    Preferences prefs;
-    CameraServer server;
-    public static int g_exp;
     private SendableChooser<Double> autoChooser;
     private static final Logger LOGGER = Logger.getLogger(Robot.class.getName());
     private static final LoggingSystem LOGGING_SYSTEM = LoggingSystem.getInstance();
@@ -49,8 +46,8 @@ public class Robot extends TimedRobot {
     private static IntakeSubsystem intakeSubsystem;
 
     private static OperatorInterface operatorInterface;
-    private static final int IMG_WIDTH = 320;
-    private static final int IMG_HEIGHT = 240;
+    private static final int IMG_WIDTH = 640;
+    private static final int IMG_HEIGHT = 480;
 
     private VisionThread visionThread;
     private double centerX = 0.0;
@@ -62,10 +59,7 @@ public class Robot extends TimedRobot {
      *Initializes the TalonSRX Groups, the Solenoid, Operator Interface, Lift Motors, and Intake Motors.
      */
     @Override
-    public void robotInit()  {
-        //prefs = Preferences.getInstance();
-        //g_exp = prefs.getInt("exp", 1);
-
+    public void robotInit() {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
         camera.setBrightness(1);
         camera.setExposureManual(20);
