@@ -61,6 +61,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+        camera.setBrightness(5);
+        //camera.setExposureManual(5);
         camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
         autoChooser = new SendableChooser<>();
@@ -122,7 +124,7 @@ public class Robot extends TimedRobot {
         operatorInterface = new OperatorInterface();
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-            if (!pipeline){
+            if (!pipeline.filterContoursOutput().isEmpty()){
                 LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
