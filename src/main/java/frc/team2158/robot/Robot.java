@@ -156,22 +156,28 @@ public class Robot extends TimedRobot {
         double centerX;
         synchronized (imgLock) {
             centerX = this.centerX;
+
         }
-        double turn = centerX - (IMG_WIDTH / 2);
-        LOGGER.info(Double.toString(centerX));
-        if((centerX == 0) || (centerX < 50 && centerX > 30)){
+        //turn = centerX - (IMG_WIDTH / 2);
+        int rightBound = 90;
+        int leftBound = 65;
+        double Rturn = (-1/3)*(centerX-90)+110 ;
+        double Lturn = (-20/74)*(centerX-6)+110 ;
+        if(centerX != 0)
+            LOGGER.info(Double.toString(centerX));
+        if((centerX == 0) || (centerX < rightBound && centerX > leftBound)){
             getDriveSubsystem().arcadeDrive(0,0);
         }
-        else if(centerX >= 50){
+        else if(centerX >= rightBound){
             LOGGER.warning("o5");
-            getDriveSubsystem().arcadeDrive(-.3, turn * 0.005);}
-        else if(centerX <= 30)
+            getDriveSubsystem().arcadeDrive(-.3, Rturn * -0.005);
+        }
+        else if(centerX <= leftBound)
         {
             LOGGER.warning("06");
-            getDriveSubsystem().arcadeDrive(-.3, turn * -0.004);
+            getDriveSubsystem().arcadeDrive(-.3,Lturn * 0.005);
         }
     }
-
     public static DriveSubsystem getDriveSubsystem() {
         if(driveSubsystem != null) {
             return driveSubsystem;
