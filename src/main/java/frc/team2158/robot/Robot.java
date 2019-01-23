@@ -37,6 +37,9 @@ import java.util.logging.Logger;
  * Initializes the teleOperated code.
  */
 public class Robot extends TimedRobot {
+    Preferences prefs;
+    CameraServer server;
+    public static int g_exp;
     private SendableChooser<Double> autoChooser;
     private static final Logger LOGGER = Logger.getLogger(Robot.class.getName());
     private static final LoggingSystem LOGGING_SYSTEM = LoggingSystem.getInstance();
@@ -60,7 +63,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit()  {
+        //prefs = Preferences.getInstance();
+        //g_exp = prefs.getInt("exp", 1);
+
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+        camera.setBrightness(1);
+        camera.setExposureManual(20);
         camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
         autoChooser = new SendableChooser<>();
@@ -122,7 +130,7 @@ public class Robot extends TimedRobot {
         operatorInterface = new OperatorInterface();
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-            if (){
+            if (!pipeline.filterContoursOutput().isEmpty()) {
                 LOGGER.warning("e2");
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
