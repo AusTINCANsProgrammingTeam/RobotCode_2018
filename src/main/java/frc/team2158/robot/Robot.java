@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
 
     private VisionThread visionThread;
     private double centerX = 0.0;
+    private double centerY = 0.0;
 
     private final Object imgLock = new Object();
     private Spark blinkin = new Spark(6);
@@ -129,10 +130,12 @@ public class Robot extends TimedRobot {
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
+                    centerY = r.y + (r.height);
                 }
             }
             else{
                 centerX = 0.0;
+                centerY = 0.0;
             }
         });
         visionThread.start();
@@ -166,7 +169,7 @@ public class Robot extends TimedRobot {
         if(centerX != 0)
             LOGGER.info(Double.toString(centerX));
         if((centerX == 0) || (centerX < rightBound && centerX > leftBound)){
-            getDriveSubsystem().arcadeDrive(0,0);
+            getDriveSubsystem().arcadeDrive (0,0);
         }
         else if(centerX >= rightBound){
             LOGGER.warning("o5");
