@@ -133,18 +133,12 @@ public class Robot extends TimedRobot {
             if (!pipeline.filterContoursOutput().isEmpty()) {
                 //LOGGER.warning("e2");
                 r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-                MatOfPoint f = pipeline.filterContoursOutput().get(0);
-                /*for(int i = 0; i <= f.rows(); i++){
-                    for(int j; j <)
-                }*/
-                if(x == 0) {
-                    LOGGER.warning("start");
-                    for (Point p : f.toArray()) {
-                        LOGGER.warning(p.toString());
-                    }
-                    LOGGER.warning("end");
-                    x = 1;
+                ArrayList<GripPipeline.Line> lines = pipeline.findLinesOutput();
+                for(GripPipeline.Line l: lines){
+                    LOGGER.warning("" + l.x1 + ", " + l.y1 + ", " + l.x2 + ", " + l.y2);
+
                 }
+
                 //LOGGER.warning("" +f.cols()+", "+f.rows());
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
