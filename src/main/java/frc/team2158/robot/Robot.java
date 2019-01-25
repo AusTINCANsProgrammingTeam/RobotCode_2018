@@ -16,8 +16,11 @@ import frc.team2158.robot.subsystem.drive.GearMode;
 import frc.team2158.robot.subsystem.drive.TalonSRXGroup;
 import frc.team2158.robot.subsystem.intake.IntakeSubsystem;
 import frc.team2158.robot.subsystem.lift.LiftSubsystem;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Mat;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -26,6 +29,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.vision.VisionRunner;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 //TODO Rename some classes <- Billy's job.
 //TODO Lua macros
@@ -52,7 +56,8 @@ public class Robot extends TimedRobot {
     private VisionThread visionThread;
     private double centerX = 0.0;
     private double centerY = 0.0;
-
+    public Rect r;
+    public int x = 0;
     private final Object imgLock = new Object();
     private Spark blinkin = new Spark(6);
 
@@ -62,8 +67,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
-        camera.setBrightness(1);
-        camera.setExposureManual(20);
+        camera.setBrightness(20);
+        camera.setExposureManual(15);
         camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
         autoChooser = new SendableChooser<>();
@@ -126,11 +131,23 @@ public class Robot extends TimedRobot {
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
-                LOGGER.warning("e2");
-                Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+                //LOGGER.warning("e2");
+                r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+                MatOfPoint f = pipeline.filterContoursOutput().get(0);
+                /*for(int i = 0; i <= f.rows(); i++){
+                    for(int j; j <)
+                }*/
+                if(x == 0) {
+                    LOGGER.warning("start");
+                    for (Point p : f.toArray()) {
+                        LOGGER.warning(p.toString());
+                    }
+                    LOGGER.warning("end");
+                    x = 1;
+                }
+                //LOGGER.warning("" +f.cols()+", "+f.rows());
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
-                    centerY = r.y + (r.height);
                 }
             }
             else{
@@ -138,9 +155,14 @@ public class Robot extends TimedRobot {
                 centerY = 0.0;
             }
         });
+
         visionThread.start();
 
         LOGGER.info("Robot initialization completed.");
+    }
+
+    public void fit(Mat r){
+
     }
 
     /**
@@ -163,22 +185,25 @@ public class Robot extends TimedRobot {
         }
         //turn = centerX - (IMG_WIDTH / 2);
         int rightBound = 90;
-        int leftBound = 65;
+        int leftBound = 70;
         double Rturn = (-1/3)*(centerX-90)+110 ;
         double Lturn = (-20/74)*(centerX-6)+110 ;
         if(centerX != 0)
             LOGGER.info(Double.toString(centerX));
-        if((centerX == 0) || (centerX < rightBound && centerX > leftBound)){
-            getDriveSubsystem().arcadeDrive (0,0);
+        if((centerX < rightBound && centerX > leftBound)){
+            //getDriveSubsystem().arcadeDrive(-.6,0);
+        }
+        else if((centerX == 0)){
+            //getDriveSubsystem().arcadeDrive(0,0);
         }
         else if(centerX >= rightBound){
             LOGGER.warning("o5");
-            getDriveSubsystem().arcadeDrive(-.3, Rturn * -0.005);
+            //getDriveSubsystem().arcadeDrive(-.3, Rturn * -0.005);
         }
         else if(centerX <= leftBound)
         {
             LOGGER.warning("06");
-            getDriveSubsystem().arcadeDrive(-.3,Lturn * 0.005);
+            //getDriveSubsystem().arcadeDrive(-.3,Lturn * 0.005);
         }
     }
     public static DriveSubsystem getDriveSubsystem() {
