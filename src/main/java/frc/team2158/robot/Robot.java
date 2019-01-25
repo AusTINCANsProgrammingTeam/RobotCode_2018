@@ -64,8 +64,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
-        camera.setBrightness(1);
-        camera.setExposureManual(5);
+        camera.setBrightness(20);
+        camera.setExposureManual(15);
         camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
         // Initialize the auto chooser system
         autoChooser = new SendableChooser<>();
