@@ -148,8 +148,6 @@ public class Robot extends TimedRobot {
                 //LOGGER.warning("" +f.cols()+", "+f.rows());
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
-                    centerY = r.y +(r.height/2);
-
                 }
             }
             else{
