@@ -16,6 +16,8 @@ import frc.team2158.robot.subsystem.drive.GearMode;
 import frc.team2158.robot.subsystem.drive.TalonSRXGroup;
 import frc.team2158.robot.subsystem.intake.IntakeSubsystem;
 import frc.team2158.robot.subsystem.lift.LiftSubsystem;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Mat;
@@ -27,6 +29,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.vision.VisionRunner;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 //TODO Rename some classes <- Billy's job.
 //TODO Lua macros
@@ -54,7 +57,7 @@ public class Robot extends TimedRobot {
     private double centerX = 0.0;
     private double centerY = 0.0;
     public Rect r;
-
+    public int x = 0;
     private final Object imgLock = new Object();
     private Spark blinkin = new Spark(6);
 
@@ -128,9 +131,21 @@ public class Robot extends TimedRobot {
 
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
             if (!pipeline.filterContoursOutput().isEmpty()) {
-                LOGGER.warning("e2");
+                //LOGGER.warning("e2");
                 r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-                LOGGER.warning(Double.toString(r.x)+", "+Double.toString(r.y)+", "+Double.toString(r.height)+", "+Double.toString(r.width));
+                MatOfPoint f = pipeline.filterContoursOutput().get(0);
+                /*for(int i = 0; i <= f.rows(); i++){
+                    for(int j; j <)
+                }*/
+                if(x == 0) {
+                    LOGGER.warning("start");
+                    for (Point p : f.toArray()) {
+                        LOGGER.warning(p.toString());
+                    }
+                    LOGGER.warning("end");
+                    x = 1;
+                }
+                //LOGGER.warning("" +f.cols()+", "+f.rows());
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
                     centerY = r.y +(r.height/2);
