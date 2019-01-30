@@ -8,11 +8,13 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 
+
 import java.util.logging.Logger;
 
 public class TalonSRXGroup implements SpeedController {
     private static final Logger LOGGER = Logger.getLogger(TalonSRXGroup.class.getName());
     private WPI_TalonSRX master;
+
 
 
     /**
@@ -39,6 +41,12 @@ public class TalonSRXGroup implements SpeedController {
             slave.follow(master);
         }
     }
+
+
+
+
+
+
 
     /**
      * Set the output to the value calculated by PIDController.
@@ -100,4 +108,6 @@ public class TalonSRXGroup implements SpeedController {
     public void stopMotor() {
         master.stopMotor();
     }
+
+
 }

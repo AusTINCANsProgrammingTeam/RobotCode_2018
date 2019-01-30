@@ -1,5 +1,6 @@
 package frc.team2158.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -67,6 +68,9 @@ public class Robot extends TimedRobot {
     private final Object imgLock = new Object();
     private Spark blinkin = new Spark(6);
 
+    public  static WPI_TalonSRX leftTalon;
+    public static WPI_TalonSRX rightTalon;
+
     /**
      *Initializes the TalonSRX Groups, the Solenoid, Operator Interface, Lift Motors, and Intake Motors.
      */
@@ -113,10 +117,13 @@ public class Robot extends TimedRobot {
                         RobotMap.GEARBOX_REVERSE_CHANNEL)
 
 
-
-
-
         );
+        leftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0 ,10);
+        rightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,10);
+
+
+        leftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,10);
+        rightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,10);
         LOGGER.info("Drive Subsystem Initialized properly!");
 
         // Initialize the lift subsystem.

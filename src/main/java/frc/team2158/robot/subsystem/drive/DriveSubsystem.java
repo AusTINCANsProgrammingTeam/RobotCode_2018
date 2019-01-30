@@ -22,7 +22,6 @@ public class DriveSubsystem extends Subsystem {
     private DoubleSolenoid gearboxSolenoid;
     public Encoder encLeft;
     public Encoder encRight;
-    
 
     /**
      * This initializes the drive subsystem.
@@ -36,13 +35,11 @@ public class DriveSubsystem extends Subsystem {
         differentialDrive.setSafetyEnabled(false);
         this.gearboxSolenoid = gearboxSolenoid;
         setGearMode(GearMode.LOW); //todo maybe this is part of the "every/other" bug?
-
+        encLeft = new Encoder(0, 1);
         encRight = new Encoder(2, 3);
         LOGGER.info("Drive subsystem initialization complete!");
     }
-    public Encoder getLeftEn(){
-      return;
-    }
+
 
     /**
      * Sets the speed of both sides of the tank drive.

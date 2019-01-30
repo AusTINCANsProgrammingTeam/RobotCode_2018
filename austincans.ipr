@@ -207,6 +207,7 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/2018_Offseason_Robot" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Gradle: edu.wpi.first.cscore:cscore-java:1.1.0">
