@@ -28,8 +28,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.vision.VisionRunner;
 import edu.wpi.first.wpilibj.vision.VisionThread;
+import jaci.pathfinder.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.logging.Logger;
 //TODO Rename some classes <- Billy's job.
 //TODO Lua macros
@@ -56,6 +60,8 @@ public class Robot extends TimedRobot {
     private VisionThread visionThread;
     private double centerX = 0.0;
     private double centerY = 0.0;
+    public ArrayList<Double> linesArray =  new ArrayList<Double>();
+    public HashMap<Double, GripPipeline.Line> hm = new HashMap<Double, GripPipeline.Line>();
     public Rect r;
     public int x = 0;
     private final Object imgLock = new Object();
@@ -105,6 +111,11 @@ public class Robot extends TimedRobot {
                 ),
                 new DoubleSolenoid(RobotMap.PCM_ADDRESS, RobotMap.GEARBOX_FORWARD_CHANNEL,
                         RobotMap.GEARBOX_REVERSE_CHANNEL)
+
+
+
+
+
         );
         LOGGER.info("Drive Subsystem Initialized properly!");
 
@@ -134,11 +145,17 @@ public class Robot extends TimedRobot {
                 //LOGGER.warning("e2");
                 r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 ArrayList<GripPipeline.Line> lines = pipeline.findLinesOutput();
-                for(GripPipeline.Line l: lines){
-                    LOGGER.warning("" + l.x1 + ", " + l.y1 + ", " + l.x2 + ", " + l.y2);
-
+                if (x == 0) {
+                    for (GripPipeline.Line l : lines) {
+                        //LOGGER.warning("" + l.x1 + ", " + l.y1 + ", " + l.x2 + ", " + l.y2);
+                        double lin  = l.length();
+                        linesArray.add(lin);
+                        hm.put(lin, l);
+                    }
+                    x = 1;
+                    Collections.sort(linesArray, Collections.reverseOrder());
+                    LOGGER.warning(Double.toString(linesArray.get(0))+", "+Double.toString(linesArray.get(1)));
                 }
-
                 //LOGGER.warning("" +f.cols()+", "+f.rows());
                 synchronized (imgLock) {
                     centerX = r.x + (r.width / 2);
@@ -307,7 +324,6 @@ public class Robot extends TimedRobot {
 
                 break;
         }
-
 
     }
     private static Timer timer = new Timer();

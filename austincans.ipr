@@ -24,7 +24,6 @@
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -198,10 +197,9 @@
       <module fileurl="file://$PROJECT_DIR$/RobotCode_2018.iml" filepath="$PROJECT_DIR$/RobotCode_2018.iml" />
       <module fileurl="file://$PROJECT_DIR$/RobotCode_2018_main.iml" filepath="$PROJECT_DIR$/RobotCode_2018_main.iml" group="RobotCode_2018" />
       <module fileurl="file://$PROJECT_DIR$/RobotCode_2018_test.iml" filepath="$PROJECT_DIR$/RobotCode_2018_test.iml" group="RobotCode_2018" />
-      <module fileurl="file://$PROJECT_DIR$/austincans.iml" filepath="$PROJECT_DIR$/austincans.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">

@@ -1,6 +1,9 @@
 package frc.team2158.robot.subsystem.drive;
 
+import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -17,6 +20,9 @@ public class DriveSubsystem extends Subsystem {
     private DifferentialDrive differentialDrive;
     private GearMode gearMode;
     private DoubleSolenoid gearboxSolenoid;
+    public Encoder encLeft;
+    public Encoder encRight;
+    
 
     /**
      * This initializes the drive subsystem.
@@ -30,7 +36,12 @@ public class DriveSubsystem extends Subsystem {
         differentialDrive.setSafetyEnabled(false);
         this.gearboxSolenoid = gearboxSolenoid;
         setGearMode(GearMode.LOW); //todo maybe this is part of the "every/other" bug?
+
+        encRight = new Encoder(2, 3);
         LOGGER.info("Drive subsystem initialization complete!");
+    }
+    public Encoder getLeftEn(){
+      return;
     }
 
     /**

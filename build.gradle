@@ -22,6 +22,9 @@ deploy {
         }
     }
 }
+dependencies {
+    compile pathfinder()
+}
 
 // Adding the Maven central repository.
 repositories {

@@ -3,6 +3,10 @@ package frc.team2158.robot.subsystem.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
 
 import java.util.logging.Logger;
 
@@ -29,6 +33,7 @@ public class TalonSRXGroup implements SpeedController {
         master.config_kP(0, 0.4, 0);
         master.config_kI(0, 0.0, 0);
         master.config_kD(0, 0.0, 0);
+
 
         for(WPI_TalonSRX slave : slaves) {
             slave.follow(master);
